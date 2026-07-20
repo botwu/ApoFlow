@@ -95,7 +95,44 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python sample_split.py
 
 ---
 
-## 5. Evaluation
+## 5. Custom inference
+
+Activate the Apo2Mol conda environment first. A runnable `8tv6` example is
+provided in `examples/8tv6/`. Both custom modes automatically calculate Vina
+score-only affinities and reference-free evaluation metrics (molecule/atom
+stability, reconstruction and completeness rates, QED, SA, logP, Lipinski, and
+ring-size ratios); all metrics are saved in `metadata.json`.
+
+### 5.1 From a prepared apo pocket
+
+```bash
+python sample_custom_pocket.py \
+  --apo-pocket examples/8tv6/apo_pocket.pdb \
+  --ligand-num-atoms 26 \
+  --num-samples 1 \
+  --output-dir sampled_results/custom_pocket_8tv6/
+```
+
+### 5.2 Extract an apo pocket from an apo/holo pair
+
+```bash
+python sample_custom_complex.py \
+  --apo-pdb examples/8tv6/apo_protein.pdb \
+  --holo-pdb examples/8tv6/holo_protein.pdb \
+  --ligand examples/8tv6/bound_ligand.sdf \
+  --ligand-num-atoms 26 \
+  --num-samples 1 \
+  --output-dir sampled_results/custom_complex_8tv6/
+```
+
+The second mode requires identical apo/holo chain sequences. The holo ligand is
+used only to locate the pocket; generation is conditioned on the mapped apo
+pocket. Outputs include `result_0.pt`, reconstructed structures, and
+`metadata.json`.
+
+---
+
+## 6. Evaluation
 
 Compute evaluation metrics on the sampled outputs:
 

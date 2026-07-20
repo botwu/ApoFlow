@@ -901,7 +901,7 @@ class ScorePosNet3D(nn.Module):
                 rmsd = torch.sqrt(((pred_protein_pos - protein_pos_apo) ** 2).sum(-1)).mean()
                 rmsd2 = torch.sqrt(((pred_protein_pos - protein_pos_holo) ** 2).sum(-1)).mean()
                 rmsd3 = torch.sqrt(((protein_pos_apo - protein_pos_holo) ** 2)).sum(-1).mean()
-                print("RMSD-Apo: ", rmsd, "RMSD-Holo: ", rmsd2, "RMSD-Apo-Holo: ", rmsd3)
+                # print("RMSD-Apo: ", rmsd, "RMSD-Holo: ", rmsd2, "RMSD-Apo-Holo: ", rmsd3)
                 protein_pos = pred_protein_pos
             else:
                 pred_protein_pos = protein_pos
