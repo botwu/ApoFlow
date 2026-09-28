@@ -9,3 +9,6 @@ sampled_results/
 tmp/
 eval_results/
 .DS_Store
+
+# papers / documents
+*.pdf
